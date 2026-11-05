@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA: Tokens, Custos e Segurança</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Inteligência Artificial</h1>
+        <p>Tokens, Custos e Segurança dos Modelos de Linguagem</p>
+    </header>
+
+    <nav>
+        <a href="#guardrails">GuardRails</a>
+        <a href="#tokens">Tokens</a>
+        <a href="#calculadora">Calculadora</a>
+        <a href="#seguranca">Segurança</a>
+    </nav>
+
+    <main>
+
+        <section class="intro">
+            <h2>Como funcionam os modelos de linguagem?</h2>
+            <p>
+                Os modelos de linguagem utilizam tokens para processar
+                informações. Cada pergunta enviada e cada resposta
+                recebida consome recursos computacionais.
+            </p>
+        </section>
+
+        <section id="guardrails" class="card">
+            <h2>1. Configurando GuardRails</h2>
+
+            <p>
+                GuardRails são instruções e regras que orientam o
+                comportamento de um assistente de inteligência artificial.
+            </p>
+
+            <div class="code-example">
+                <h3>Exemplo de instruções:</h3>
+
+                <pre>
+instructions = """
+Você é um mentor de carreiras.
+
+- Responda com educação.
+- Ajude com orientação profissional.
+- Não forneça informações perigosas.
+- Não solicite senhas ou dados pessoais.
+- Seja claro e objetivo.
+"""
+                </pre>
+            </div>
+
+            <h3>Teste o comportamento do assistente:</h3>
+
+            <input
+                type="text"
+                id="pergunta"
+                placeholder="Digite sua pergunta..."
+            >
+
+            <button onclick="testarGuardrails()">
+                Enviar pergunta
+            </button>
+
+            <div id="resposta" class="resultado">
+                A resposta aparecerá aqui.
+            </div>
+        </section>
+
+        <section id="tokens" class="card">
+            <h2>2. Entendendo os Tokens</h2>
+
+            <p>
+                Tokens são unidades utilizadas pelos modelos de linguagem
+                para processar textos. Uma palavra pode representar um
+                ou mais tokens.
+            </p>
+
+            <div class="token-info">
+                <div>
+                    <h3>Input</h3>
+                    <p>Tokens enviados pelo usuário e pelas instruções.</p>
+                </div>
+
+                <div>
+                    <h3>Output</h3>
+                    <p>Tokens utilizados na resposta gerada pela IA.</p>
+                </div>
+
+                <div>
+                    <h3>Total</h3>
+                    <p>Soma dos tokens de entrada e saída.</p>
+                </div>
+            </div>
+
+            <p class="formula">
+                Total de tokens = Input + Output
+            </p>
+        </section>
+
+        <section id="calculadora" class="card">
+            <h2>3. Calculadora de Tokens e Custos</h2>
+
+            <p>
+                Simule o consumo de tokens e estime o custo de uma
+                interação com uma API de inteligência artificial.
+            </p>
+
+            <label for="inputTokens">Tokens de entrada:</label>
+            <input
+                type="number"
+                id="inputTokens"
+                min="0"
+                value="1000"
+            >
+
+            <label for="outputTokens">Tokens de saída:</label>
+            <input
+                type="number"
+                id="outputTokens"
+                min="0"
+                value="500"
+            >
+
+            <label for="precoInput">
+                Preço por 1 milhão de tokens de entrada (US$):
+            </label>
+            <input
+                type="number"
+                id="precoInput"
+                min="0"
+                step="0.01"
+                value="0.15"
+            >
+
+            <label for="precoOutput">
+                Preço por 1 milhão de tokens de saída (US$):
+            </label>
+            <input
+                type="number"
+                id="precoOutput"
+                min="0"
+                step="0.01"
+                value="0.60"
+            >
+
+            <button onclick="calcularTokens()">
+                Calcular consumo
+            </button>
+
+            <div class="resultado-calculo">
+                <h3>Resultado da simulação</h3>
+
+                <p>Tokens de entrada: <strong id="totalInput">0</strong></p>
+
+                <p>Tokens de saída: <strong id="totalOutput">0</strong></p>
+
+                <p>Total de tokens: <strong id="totalTokens">0</strong></p>
+
+                <p>Custo de entrada: <strong id="custoInput">US$ 0,00</strong></p>
+
+                <p>Custo de saída: <strong id="custoOutput">US$ 0,00</strong></p>
+
+                <h3 class="custo-final">
+                    Custo total: <span id="custoTotal">US$ 0,00</span>
+                </h3>
+            </div>
+
+            <small>
+                Simulação educativa. Os preços são exemplos editáveis
+                e não representam necessariamente os preços atuais
+                de qualquer provedor.
+            </small>
+        </section>
+
+        <section class="card">
+            <h2>4. Monitorando o uso da API</h2>
+
+            <p>
+                Podemos utilizar o objeto response.usage para acompanhar
+                o consumo de tokens de uma requisição.
+            </p>
+
+            <pre>
+print(f"Tokens de entrada: {response.usage.input_tokens}")
+print(f"Tokens de saída: {response.usage.output_tokens}")
+print(f"Total de tokens: {response.usage.total_tokens}")
+            </pre>
+
+            <p>
+                Os nomes dos campos podem variar conforme a API
+                e o SDK utilizado.
+            </p>
+        </section>
+
+        <section id="seguranca" class="card seguranca">
+            <h2>5. Segurança e Privacidade</h2>
+
+            <p>
+                É importante proteger nossos dados pessoais ao utilizar
+                ferramentas de inteligência artificial.
+            </p>
+
+            <ul>
+                <li>Não compartilhe senhas.</li>
+                <li>Não informe números de CPF.</li>
+                <li>Evite enviar endereços pessoais.</li>
+                <li>Não compartilhe informações bancárias.</li>
+                <li>Verifique as políticas de privacidade do provedor.</li>
+            </ul>
+
+            <div class="alerta">
+                <strong>Atenção!</strong>
+                <p>
+                    GuardRails ajudam a orientar o comportamento da IA,
+                    mas não garantem segurança absoluta nem substituem
+                    controles de privacidade e proteção de dados.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Projeto Educacional | Inteligência Artificial</p>
+        <p>Aprendendo sobre Tokens, Custos e Segurança.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
